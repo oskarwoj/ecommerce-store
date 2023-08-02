@@ -29,11 +29,11 @@ export interface Image {
 export interface Size {
   id: string;
   name: string;
-  Value: string;
+  value: string;
 }
 
 export interface Color {
   id: string;
   name: string;
-  Value: string;
+  value: string;
 }
