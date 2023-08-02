@@ -4,12 +4,15 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Product } from "@/types";
+import { Expand, ShoppingCart } from "lucide-react";
+import Currency from "./currency";
+import IconButton from "./icon-button";
 
-interface ProductCard {
+interface ProductCardProps {
   data: Product;
 }
 
-const ProductCard: React.FC<ProductCard> = ({ data }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const router = useRouter();
 
   const handleClick = () => {
@@ -30,7 +33,16 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
           className="aspect-square object-cover rounded-md"
         />
         <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
-          <div className="flex gap-x-6 justify-center"></div>
+          <div className="flex gap-x-6 justify-center">
+            <IconButton
+              onClick={() => {}}
+              icon={<Expand size={20} className="text-gray-600" />}
+            />
+            <IconButton
+              onClick={() => {}}
+              icon={<ShoppingCart size={20} className="text-gray-600" />}
+            />
+          </div>
         </div>
       </div>
       {/* Description */}
@@ -39,7 +51,9 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>
       {/* Price & Review */}
-      <div className="flex items-center justify-between"></div>
+      <div className="flex items-center justify-between">
+        <Currency value={data?.price} />
+      </div>
     </div>
   );
 };
