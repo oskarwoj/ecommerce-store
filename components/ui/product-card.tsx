@@ -1,23 +1,23 @@
 "use client";
 
-import { Expand, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
+import { Expand, ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import useCart from "@/hooks/use-cart";
+import Currency from "@/components/ui/currency";
+import IconButton from "@/components/ui/icon-button";
 import usePreviewModal from "@/hooks/use-preview-modal";
+import useCart from "@/hooks/use-cart";
 import { Product } from "@/types";
-import Currency from "./currency";
-import IconButton from "./icon-button";
 
-interface ProductCardProps {
+interface ProductCard {
   data: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
-  const cart = useCart();
+const ProductCard: React.FC<ProductCard> = ({ data }) => {
   const previewModal = usePreviewModal();
+  const cart = useCart();
   const router = useRouter();
 
   const handleClick = () => {
@@ -26,11 +26,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 
   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+
     previewModal.onOpen(data);
   };
 
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+
     cart.addItem(data);
   };
 
@@ -65,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         <p className="font-semibold text-lg">{data.name}</p>
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>
-      {/* Price & Review */}
+      {/* Price & Reiew */}
       <div className="flex items-center justify-between">
         <Currency value={data?.price} />
       </div>

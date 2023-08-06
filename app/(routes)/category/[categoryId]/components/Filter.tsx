@@ -1,11 +1,11 @@
 "use client";
 
 import qs from "query-string";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import Button from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Color, Size } from "@/types";
-import { useRouter, useSearchParams } from "next/navigation";
 
 interface FilterProps {
   data: (Size | Color)[];
@@ -30,16 +30,18 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
     if (current[valueKey] === id) {
       query[valueKey] = null;
     }
+
     const url = qs.stringifyUrl(
       {
         url: window.location.href,
         query,
       },
-      { skipNull: true }
+      { skipNull: true },
     );
 
     router.push(url);
   };
+
   return (
     <div className="mb-8">
       <h3 className="text-lg font-semibold">{name}</h3>
@@ -49,8 +51,8 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
           <div key={filter.id} className="flex items-center">
             <Button
               className={cn(
-                "rounded-md text-sm text-gray-800 py-2 bg-white border border-gray-300",
-                selectedValue === filter.id && "bg-black text-white"
+                "rounded-md text-sm text-gray-800 p-2 bg-white border border-gray-300",
+                selectedValue === filter.id && "bg-black text-white",
               )}
               onClick={() => onClick(filter.id)}
             >
@@ -62,4 +64,5 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
     </div>
   );
 };
+
 export default Filter;

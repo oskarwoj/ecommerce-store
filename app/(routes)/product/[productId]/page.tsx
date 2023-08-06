@@ -1,15 +1,18 @@
-import getProduct from "@/actions/getProduct";
-import getProducts from "@/actions/getProducts";
+import ProductList from "@/components/product-list";
 import Gallery from "@/components/gallery";
 import Info from "@/components/info";
-import ProductList from "@/components/product-list";
+import getProduct from "@/actions/get-product";
+import getProducts from "@/actions/get-products";
 import Container from "@/components/ui/container";
+
+export const revalidate = 0;
 
 interface ProductPageProps {
   params: {
     productId: string;
   };
 }
+
 const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   const product = await getProduct(params.productId);
   const suggestedProducts = await getProducts({

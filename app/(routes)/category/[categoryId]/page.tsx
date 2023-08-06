@@ -1,14 +1,17 @@
-import getCategory from "@/actions/getCategory";
-import getColors from "@/actions/getColors";
-import getProducts from "@/actions/getProducts";
-import getSizes from "@/actions/getSizes";
-import Billboard from "@/components/billboard";
 import Container from "@/components/ui/container";
-import NoResults from "@/components/ui/no-results";
+import Billboard from "@/components/ui/billboard";
 import ProductCard from "@/components/ui/product-card";
+import NoResults from "@/components/ui/no-results";
+
+import getProducts from "@/actions/get-products";
+import getCategory from "@/actions/get-category";
+import getSizes from "@/actions/get-sizes";
+import getColors from "@/actions/get-colors";
 
 import Filter from "./components/filter";
 import MobileFilters from "./components/mobile-filters";
+
+export const revalidate = 0;
 
 interface CategoryPageProps {
   params: {
@@ -29,10 +32,10 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId,
   });
-
   const sizes = await getSizes();
   const colors = await getColors();
   const category = await getCategory(params.categoryId);
+
   return (
     <div className="bg-white">
       <Container>
